@@ -69,11 +69,13 @@ for element in display_list:
     display_word += element
 
 print(display_word)
-round = 0
+errors = 0
 while '_' in display_list:
     
     guess = input("Guess the letter: ").lower()
-    if guess in chosen_word_list:
+    if guess in display_list:
+        print(f"You already guessed this letter: {guess}")
+    elif guess in chosen_word_list:
         indices = [index for index, value in enumerate(chosen_word_list) if value == guess]
         
         for index in indices:
@@ -84,11 +86,12 @@ while '_' in display_list:
         print(display_word)
         print("CORRECT !")
     else:
-        print(HANGMANPICS[round])
-        if round == (len(HANGMANPICS) - 1):
+        print(f"{guess} not in word !")
+        print(HANGMANPICS[errors])        
+        if errors == (len(HANGMANPICS) - 1):
             print("you lose : (")
             print(f"The word was: {chosen_word}")
             break
-        round += 1
+        errors += 1
 if '_' not in display_list:
     print(f"You have won ! The word was: {chosen_word}")
